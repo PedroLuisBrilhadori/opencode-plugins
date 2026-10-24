@@ -19,8 +19,7 @@
  * para JSONL local e, opcionalmente, Loki.
  */
 
-import { Plugin } from "@opencode-ai/plugin"
-import type { Plugin as PluginV2, Context } from "@opencode-ai/plugin/promise/plugin"
+import type { Context } from "@opencode-ai/plugin/promise/plugin"
 import type { ThinkingConfig } from "../config"
 import {
   createEventEmitter,
@@ -295,10 +294,9 @@ export const createGuardCore = (
  * export { createThinkingGuardPlugin as default } from "../../opencode-plugins/src/index.ts"
  * ```
  */
-export const createThinkingGuardPlugin = (options?: ThinkingGuardOptions): PluginV2 =>
-  Plugin.define({
-    id: "thinking-guard",
-    setup: async (ctx: Context) => {
+export const createThinkingGuardPlugin = (options?: ThinkingGuardOptions) => ({
+  id: "thinking-guard",
+  setup: async (ctx: Context) => {
       const controller = new AbortController()
       const actions: SessionActions = {
         interrupt: (sessionID) => ctx.session.interrupt({ sessionID }),

@@ -11,7 +11,6 @@
  * ```
  */
 
-import { Plugin } from "@opencode-ai/plugin"
 import { config } from "./config"
 import {
   createGuardCore,
@@ -26,7 +25,7 @@ import {
 /**
  * Plugin completo: thinking-guard + truncation com config centralizada.
  */
-export default Plugin.define({
+export default ({
   id: "opencode-plugins",
   setup: async (ctx) => {
     const controller = new AbortController()

@@ -13,8 +13,7 @@
  *   (session.execution.started), não quando o plugin injeta.
  */
 
-import { Plugin } from "@opencode-ai/plugin"
-import type { Plugin as PluginV2, Context } from "@opencode-ai/plugin/promise/plugin"
+import type { Context } from "@opencode-ai/plugin/promise/plugin"
 import type { TruncationConfig } from "../config"
 import type { GuardEvent } from "./thinking-guard"
 
@@ -85,10 +84,9 @@ export const createTruncationCore = (
 /**
  * Cria o plugin de truncation para a API V2 do opencode2.
  */
-export const createTruncationPlugin = (options?: TruncationOptions): PluginV2 =>
-  Plugin.define({
-    id: "truncation",
-    setup: async (ctx: Context) => {
+export const createTruncationPlugin = (options?: TruncationOptions) => ({
+  id: "truncation",
+  setup: async (ctx: Context) => {
       const controller = new AbortController()
       const core = createTruncationCore(options, {
         injectContinue: (sessionID, text) =>
